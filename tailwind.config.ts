@@ -8,9 +8,22 @@ export default {
   ],
   theme: {
     extend: {
+      container: {
+        padding: {
+          DEFAULT: "1rem",
+        },
+      },
+      fontFamily: {
+        poppins: ["var(--font-popins)"],
+      },
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        brand: "#3da9fc",
+        heading: "#094067",
+        paragraph: "#5f6c7b",
+        btnText: "#fffffe",
+      },
+      backgroundImage: {
+        banner: "url('/images/bannerTemple.png')",
       },
     },
   },
