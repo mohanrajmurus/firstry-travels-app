@@ -19,3 +19,15 @@ html {
   border-radius: 100% !important;
   padding: 20px !important;
 }
+
+.mySwiper {
+  padding: 0 20px;
+}
+
+.mySwiper .swiper-slide {
+  height: auto;
+}
+
+.mySwiper .swiper-wrapper {
+  align-items: stretch;
+}

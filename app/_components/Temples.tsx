@@ -33,7 +33,7 @@ const TempleCard = ({
   image: string;
 }) => {
   return (
-    <div className="shadow-md rounded-lg bg-white">
+    <div className="shadow-md rounded-lg bg-white pointer-events-auto">
       <Image
         src={image}
         alt={title}
@@ -66,16 +66,17 @@ export const Temples = () => {
       <Swiper
         slidesPerView={1}
         spaceBetween={20}
-        pagination={{ clickable: true }}
+        pagination={{ clickable: true, dynamicBullets: true }}
         navigation={true}
         modules={modules}
-        className="mySwiper mb-10 px-4"
+        className="mySwiper mb-10"
         loop={true}
         keyboard={true}
         mousewheel={true}
-        grabCursor={true}
-        touchRatio={1}
-        simulateTouch={true}
+        allowTouchMove={true}
+        touchStartPreventDefault={false}
+        preventClicks={false}
+        preventClicksPropagation={false}
         breakpoints={{
           640: {
             slidesPerView: 2,
