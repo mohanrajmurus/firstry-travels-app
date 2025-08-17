@@ -69,11 +69,13 @@ export const Temples = () => {
         pagination={{ clickable: true }}
         navigation={true}
         modules={modules}
-        className="mySwiper mb-10"
+        className="mySwiper mb-10 px-4"
         loop={true}
-        autoplay={{ delay: 2000 }}
         keyboard={true}
         mousewheel={true}
+        grabCursor={true}
+        touchRatio={1}
+        simulateTouch={true}
         breakpoints={{
           640: {
             slidesPerView: 2,
