@@ -51,53 +51,61 @@ const TempleCard = ({
 
 export const Temples = () => {
   const [modules, setModules] = React.useState<any[]>([]);
+  const [isSwiperReady, setIsSwiperReady] = React.useState(false);
 
   React.useEffect(() => {
     import("swiper/modules").then((mod) => {
       setModules([mod.Pagination, mod.Navigation, mod.Keyboard, mod.Mousewheel]);
+      setIsSwiperReady(true);
     });
   }, []);
 
   return (
     <div className="container mx-auto py-10" id="temples">
-      <p className="text-heading text-2xl lg:text-4xl font-semibold text-center mb-10">
-        Temples Covered
-      </p>
-      <Swiper
-        slidesPerView={1}
-        spaceBetween={20}
-        pagination={{ clickable: true, dynamicBullets: true }}
-        navigation={true}
-        modules={modules}
-        className="mySwiper mb-10"
-        loop={true}
-        keyboard={true}
-        mousewheel={true}
-        allowTouchMove={true}
-        touchStartPreventDefault={false}
-        preventClicks={false}
-        preventClicksPropagation={false}
-        breakpoints={{
-          640: {
-            slidesPerView: 2,
-            spaceBetween: 20,
-          },
-          768: {
-            slidesPerView: 3,
-            spaceBetween: 30,
-          },
-        }}
-      >
-        {TEMPLES_COVERED.map((temple, index) => (
-          <SwiperSlide key={index}>
-            <TempleCard
-              title={temple.title}
-              description={temple.description}
-              image={temple?.imageUrl}
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      {isSwiperReady ? (
+        <Swiper
+          slidesPerView={1}
+          spaceBetween={20}
+          pagination={{ clickable: true, dynamicBullets: true }}
+          navigation={true}
+          modules={modules}
+          className="mySwiper mb-10"
+          loop={true}
+          keyboard={true}
+          mousewheel={true}
+          allowTouchMove={true}
+          touchStartPreventDefault={false}
+          preventClicks={false}
+          preventClicksPropagation={false}
+          grabCursor={true}
+          touchRatio={1}
+          simulateTouch={true}
+          breakpoints={{
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            768: {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
+          }}
+        >
+          {TEMPLES_COVERED.map((temple, index) => (
+            <SwiperSlide key={index}>
+              <TempleCard
+                title={temple.title}
+                description={temple.description}
+                image={temple?.imageUrl}
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      ) : (
+        <div className="flex justify-center items-center h-64">
+          <div className="text-gray-500">Loading temples...</div>
+        </div>
+      )}
     </div>
   );
 };
