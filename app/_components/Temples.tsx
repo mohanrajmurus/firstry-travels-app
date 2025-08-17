@@ -1,13 +1,27 @@
 "use client";
 import Image from "next/image";
 import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Navigation, Keyboard, Mousewheel } from "swiper/modules";
+import dynamic from "next/dynamic";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/keyboard";
 import "swiper/css/mousewheel";
 import { TEMPLES_COVERED } from "../constants";
+
+const Swiper = dynamic(() => import("swiper/react").then((mod) => mod.Swiper), {
+  ssr: false,
+});
+
+const SwiperSlide = dynamic(() => import("swiper/react").then((mod) => mod.SwiperSlide), {
+  ssr: false,
+});
+
+const swiperModules = dynamic(() => 
+  import("swiper/modules").then((mod) => ({
+    default: [mod.Pagination, mod.Navigation, mod.Keyboard, mod.Mousewheel]
+  })), 
+  { ssr: false }
+);
 
 const TempleCard = ({
   title,
@@ -36,6 +50,14 @@ const TempleCard = ({
 };
 
 export const Temples = () => {
+  const [modules, setModules] = React.useState<any[]>([]);
+
+  React.useEffect(() => {
+    import("swiper/modules").then((mod) => {
+      setModules([mod.Pagination, mod.Navigation, mod.Keyboard, mod.Mousewheel]);
+    });
+  }, []);
+
   return (
     <div className="container mx-auto py-10" id="temples">
       <p className="text-heading text-2xl lg:text-4xl font-semibold text-center mb-10">
@@ -46,7 +68,7 @@ export const Temples = () => {
         spaceBetween={30}
         pagination={{ clickable: true }}
         navigation={true}
-        modules={[Pagination, Navigation, Keyboard, Mousewheel]}
+        modules={modules}
         className="mySwiper mb-10"
         loop={true}
         autoplay={{ delay: 2000 }}

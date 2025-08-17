@@ -20,7 +20,7 @@ export const BookingForm = () => {
     phone: "",
     travelDate: "",
     numberOfPersons: 1,
-    pickLocation: "",
+    pickLocation: "Kanchipuram Bus Stand",
   });
 
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>(
