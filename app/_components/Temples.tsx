@@ -65,7 +65,7 @@ export const Temples = () => {
       </p>
       <Swiper
         slidesPerView={1}
-        spaceBetween={30}
+        spaceBetween={20}
         pagination={{ clickable: true }}
         navigation={true}
         modules={modules}
@@ -75,6 +75,10 @@ export const Temples = () => {
         keyboard={true}
         mousewheel={true}
         breakpoints={{
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
           768: {
             slidesPerView: 3,
             spaceBetween: 30,
